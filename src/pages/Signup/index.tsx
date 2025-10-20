@@ -1,57 +1,7 @@
-import { useState } from 'react';
-import { useNavigate, Link, Navigate } from 'react-router-dom';
-import { authRepository } from '../../modules/auth/auth.repository';
-import { useCurrentUserStore } from '../../modules/auth/current-user.state';
-import { useUIStore } from '../../modules/ui/ui.state';
+import { Link } from 'react-router-dom';
 import './Signup.css';
 
 export default function Signup() {
-  const navigate = useNavigate();
-  const { currentUser, setCurrentUser } = useCurrentUserStore();
-  const { addFlashMessage } = useUIStore();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  // すでにログイン済みの場合はホームへリダイレクト
-  if (currentUser) {
-    return <Navigate to="/" replace />;
-  }
-
-  const signup = async () => {
-    // バリデーション
-    if (!name || !email || !password) {
-      addFlashMessage('すべての項目を入力してください', 'error');
-      return;
-    }
-
-    if (password.length < 8) {
-      addFlashMessage('パスワードは8文字以上で入力してください', 'error');
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      const { user, token } = await authRepository.signup(
-        name,
-        email,
-        password
-      );
-      localStorage.setItem('token', token);
-      setCurrentUser(user);
-      addFlashMessage('アカウントを作成しました', 'success');
-      navigate('/');
-    } catch (error: any) {
-      const errorMessage =
-        error.response?.data?.message || 'アカウント作成に失敗しました';
-      addFlashMessage(errorMessage, 'error');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <div className='signup-page'>
       <div className='signup-container'>
@@ -80,9 +30,8 @@ export default function Signup() {
                 type='text'
                 className='form-input'
                 placeholder='山田太郎'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                disabled={isLoading}
+                value=''
+                onChange={() => {}}
               />
             </div>
 
@@ -95,9 +44,8 @@ export default function Signup() {
                 type='email'
                 className='form-input'
                 placeholder='example@example.com'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={isLoading}
+                value=''
+                onChange={() => {}}
               />
             </div>
 
@@ -110,19 +58,17 @@ export default function Signup() {
                 type='password'
                 className='form-input'
                 placeholder='8文字以上'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={isLoading}
+                value=''
+                onChange={() => {}}
               />
             </div>
 
             <button
               type='button'
               className='btn btn-primary signup-submit-btn'
-              onClick={signup}
-              disabled={isLoading}
+              onClick={() => {}}
             >
-              {isLoading ? 'アカウント作成中...' : 'アカウント作成'}
+              アカウント作成
             </button>
           </div>
 

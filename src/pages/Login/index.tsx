@@ -1,47 +1,7 @@
-import { useState } from 'react';
-import { useNavigate, Link, Navigate } from 'react-router-dom';
-import { authRepository } from '../../modules/auth/auth.repository';
-import { useCurrentUserStore } from '../../modules/auth/current-user.state';
-import { useUIStore } from '../../modules/ui/ui.state';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 export default function Login() {
-  const navigate = useNavigate();
-  const { currentUser, setCurrentUser } = useCurrentUserStore();
-  const { addFlashMessage } = useUIStore();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  // すでにログイン済みの場合はホームへリダイレクト
-  if (currentUser) {
-    return <Navigate to="/" replace />;
-  }
-
-  const login = async () => {
-    // バリデーション
-    if (!email || !password) {
-      addFlashMessage('メールアドレスとパスワードを入力してください', 'error');
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      const { user, token } = await authRepository.signin(email, password);
-      localStorage.setItem('token', token);
-      setCurrentUser(user);
-      addFlashMessage('ログインしました', 'success');
-      navigate('/');
-    } catch (error: any) {
-      const errorMessage =
-        error.response?.data?.message || 'ログインに失敗しました';
-      addFlashMessage(errorMessage, 'error');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <div className='login-page'>
       <div className='login-container'>
@@ -70,9 +30,8 @@ export default function Login() {
                 type='email'
                 className='form-input'
                 placeholder='example@example.com'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={isLoading}
+                value=''
+                onChange={() => {}}
               />
             </div>
 
@@ -85,19 +44,17 @@ export default function Login() {
                 type='password'
                 className='form-input'
                 placeholder='パスワードを入力'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={isLoading}
+                value=''
+                onChange={() => {}}
               />
             </div>
 
             <button
               type='button'
               className='btn btn-primary login-submit-btn'
-              onClick={login}
-              disabled={isLoading}
+              onClick={() => {}}
             >
-              {isLoading ? 'ログイン中...' : 'ログイン'}
+              ログイン
             </button>
           </div>
 

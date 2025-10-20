@@ -1,38 +1,13 @@
-import { useState } from 'react';
 import { FiX } from 'react-icons/fi';
 import './LabelModal.css';
 
-interface LabelModalProps {
-  onClose: () => void;
-  onSave: (name: string, color: string) => void;
-}
-
-const LABEL_COLORS = [
-  { name: '赤', value: '#f44336' },
-  { name: '青', value: '#2196f3' },
-  { name: '緑', value: '#4caf50' },
-  { name: '黄', value: '#ffc107' },
-  { name: '紫', value: '#9c27b0' },
-  { name: '灰', value: '#9e9e9e' },
-];
-
-export default function LabelModal({ onClose, onSave }: LabelModalProps) {
-  const [labelName, setLabelName] = useState('');
-  const [selectedColor, setSelectedColor] = useState(LABEL_COLORS[0].value);
-
-  const handleSave = () => {
-    if (labelName.trim()) {
-      onSave(labelName.trim(), selectedColor);
-      onClose();
-    }
-  };
-
+export default function LabelModal() {
   return (
-    <div className="label-modal-overlay" onClick={onClose}>
+    <div className="label-modal-overlay" onClick={() => {}}>
       <div className="label-modal" onClick={(e) => e.stopPropagation()}>
         <div className="label-modal__header">
           <h2 className="label-modal__title">新しいラベル</h2>
-          <button className="icon-btn label-modal__close-btn" onClick={onClose}>
+          <button className="icon-btn label-modal__close-btn" onClick={() => {}}>
             <FiX />
           </button>
         </div>
@@ -48,8 +23,8 @@ export default function LabelModal({ onClose, onSave }: LabelModalProps) {
               className="form-input"
               placeholder="ラベル名を入力（最大30文字）"
               maxLength={30}
-              value={labelName}
-              onChange={(e) => setLabelName(e.target.value)}
+              value=''
+              onChange={() => {}}
               autoFocus
             />
           </div>
@@ -57,29 +32,54 @@ export default function LabelModal({ onClose, onSave }: LabelModalProps) {
           <div className="form-group">
             <label className="form-label">色</label>
             <div className="label-modal__colors">
-              {LABEL_COLORS.map((color) => (
-                <button
-                  key={color.value}
-                  className={`label-modal__color-option ${
-                    selectedColor === color.value ? 'label-modal__color-option--selected' : ''
-                  }`}
-                  style={{ backgroundColor: color.value }}
-                  onClick={() => setSelectedColor(color.value)}
-                  title={color.name}
-                />
-              ))}
+              <button
+                className="label-modal__color-option label-modal__color-option--selected"
+                style={{ backgroundColor: '#f44336' }}
+                onClick={() => {}}
+                title="赤"
+              />
+              <button
+                className="label-modal__color-option"
+                style={{ backgroundColor: '#2196f3' }}
+                onClick={() => {}}
+                title="青"
+              />
+              <button
+                className="label-modal__color-option"
+                style={{ backgroundColor: '#4caf50' }}
+                onClick={() => {}}
+                title="緑"
+              />
+              <button
+                className="label-modal__color-option"
+                style={{ backgroundColor: '#ffc107' }}
+                onClick={() => {}}
+                title="黄"
+              />
+              <button
+                className="label-modal__color-option"
+                style={{ backgroundColor: '#9c27b0' }}
+                onClick={() => {}}
+                title="紫"
+              />
+              <button
+                className="label-modal__color-option"
+                style={{ backgroundColor: '#9e9e9e' }}
+                onClick={() => {}}
+                title="灰"
+              />
             </div>
           </div>
         </div>
 
         <div className="label-modal__footer">
-          <button className="btn btn-secondary" onClick={onClose}>
+          <button className="btn btn-secondary" onClick={() => {}}>
             キャンセル
           </button>
           <button
             className="btn btn-primary"
-            onClick={handleSave}
-            disabled={!labelName.trim()}
+            onClick={() => {}}
+            disabled={true}
           >
             作成
           </button>
