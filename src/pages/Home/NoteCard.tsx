@@ -9,9 +9,6 @@ export default function NoteCard() {
           alt='メモの画像'
           className='note-card__image'
         />
-        <button className='note-card__image-remove'>
-          <FiX />
-        </button>
       </div>
       <h3 className='note-card__title'>旅行の計画</h3>
       <p className='note-card__content'>
