@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/kuru/Udemyプロト用/Google Keep講座/google-keep-clone-ui/src/**)",
+      "Read(//Users/kuru/Udemyプロト用/Google Keep講座/google-keep-clone-ui/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
