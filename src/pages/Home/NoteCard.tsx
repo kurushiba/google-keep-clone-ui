@@ -31,7 +31,7 @@ export default function NoteCard() {
       <div className='note-card__footer'>
         <span className='note-card__date'>2025-01-15</span>
         <div className='note-card__actions'>
-          <button className='icon-btn note-card__action-btn' onClick={() => {}}>
+          <button className='icon-btn note-card__action-btn'>
             <FiEdit2 />
           </button>
           <button className='icon-btn note-card__action-btn' onClick={() => {}}>
