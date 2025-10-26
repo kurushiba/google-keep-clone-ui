@@ -1,4 +1,4 @@
-import { FiEdit2, FiTrash2, FiX } from 'react-icons/fi';
+import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 
 export default function NoteCard() {
   return (
